@@ -1,0 +1,24 @@
+.main{
+    font-family: 'Rubik One', sans-serif;
+    font-size: 25px;
+    font-family: 'Rubik One', sans-serif;
+    text-transform: uppercase;
+    text-shadow: -4px -4px 0px rgb(251, 255, 6);
+    background: repeating-linear-gradient(45deg, #6e83b4, #b4796e 1px, rgb(130, 15, 15) 2px, rgb(255, 255, 255) 3px);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: table;
+    /* margin: 20px auto; */
+    margin-left: 230px
+  }
+
+  .enter {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 500ms linear;
+  }
+
+  .enterActive{
+    opacity: 1;
+    transform: translateX(0);
+  }

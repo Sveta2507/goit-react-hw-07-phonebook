@@ -1,0 +1,55 @@
+.contactsUl {
+    /* margin-top: 100px; */
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    border: 5px solid black;
+    width: 300px;
+    margin-top: 50px;
+    margin-left: 210px;
+    // box-sizing: border-box;
+
+    $border: 25px;
+    background-clip: padding-box;
+    // background: rgb(60, 71, 198);
+    border: 20px solid $border transparent;
+    border-radius: 1em;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      z-index: -1;
+      margin: -$border;
+      border-radius: inherit;
+      background: 20px linear-gradient(to bottom, red, rgb(251, 255, 0), blue, green, coral);
+  }
+}
+
+.contactsUl li {
+    display: flex;
+    margin: 20px;
+}
+
+.enter {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 500ms linear;
+}
+
+.enterActive {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.exit {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 500ms linear ;
+}
+
+.exitActive {
+    opacity: 0;
+    transform: translateX(-100%);
+}
