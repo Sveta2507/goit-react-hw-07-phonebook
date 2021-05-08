@@ -2,7 +2,8 @@ import React from "react";
 import classes from "./Filter.module.css";
 import { CSSTransition } from "react-transition-group";
 import { connect } from "react-redux";
-import actions from "../../redux/actions";
+import { changeFilter } from "../../redux/actions";
+import { getFilter } from "../../redux/selectors";
 
 const Filter = ({ toFilter, value }) => {
   return (
@@ -23,10 +24,10 @@ const Filter = ({ toFilter, value }) => {
 };
 
 const mapStateToProps = ({ contacts }) => ({
-  value: contacts.filter,
+  value: getFilter(contacts),
 });
 
 const mapDispatchToProps = {
-  toFilter: actions.handleFilter,
+  toFilter: changeFilter,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

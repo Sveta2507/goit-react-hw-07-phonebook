@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classes from "./ContactListItem.module.css";
 import { connect } from "react-redux";
-import actions from "../../redux/actions";
+import { removeContact } from "../../redux/operations";
 
 const ContactlistItem = ({ id, number, name, deleteContact }) => {
   return (
@@ -30,6 +30,6 @@ ContactlistItem.propTypes = {
 };
 
 const mapDispatchToProps = {
-  deleteContact: actions.handleDelete,
+  deleteContact: removeContact,
 };
 export default connect(null, mapDispatchToProps)(ContactlistItem);

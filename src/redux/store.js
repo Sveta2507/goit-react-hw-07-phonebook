@@ -1,9 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./reducers";
+import {
+  contactsReducer,
+  filterReducer,
+  notificationReducer,
+  loadingReducer,
+} from "./reducers";
 
 const store = configureStore({
   reducer: {
-    contacts: reducer,
+    contacts: contactsReducer,
+    filter: filterReducer,
+    isExists: notificationReducer,
+    isLoading: loadingReducer,
   },
 });
 

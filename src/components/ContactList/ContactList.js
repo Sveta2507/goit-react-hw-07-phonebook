@@ -4,19 +4,21 @@ import PropTypes from "prop-types";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styles from "./ContactList.module.scss";
 import { connect } from "react-redux";
-import actions from "../../redux/actions";
+// import actions from "../../redux/actions";
+import { getAll } from "../../redux/selectors";
 
-const Contactlist = ({ contacts }) => {
+const Contactlist = ({ getAll, handleDelete }) => {
   return (
     <TransitionGroup component="ul" className={styles.contactsUl}>
-      {contacts.map((item) => {
+      {getAll.map((item) => {
         const { name, id, number } = item;
         return (
           <CSSTransition
             key={id}
             timeout={250}
             classNames={styles}
-            in={contacts.length > 0}
+            in={getAll.length > 0}
+            handleDelete={() => handleDelete(id)}
           >
             <ContactlistItem name={name} number={number} id={id} />
           </CSSTransition>
@@ -34,21 +36,25 @@ Contactlist.propTypes = {
   ),
 };
 
-const mapStateToProps = (state) => {
-  const {
-    contacts: { items, filter },
-  } = state;
-  const filteredNames = items.filter((contact) => {
-    return contact.name.toLowerCase().includes(filter.toLowerCase());
-  });
+// const mapStateToProps = (state) => {
+//   const {
+//     contacts: { items, filter },
+//   } = state;
+//   const filteredNames = items.filter((contact) => {
+//     return contact.name.toLowerCase().includes(filter.toLowerCase());
+//   });
 
-  return {
-    contacts: filteredNames,
-  };
-};
+//   return {
+//     contacts: filteredNames,
+//   };
+// };
 
-const mapDispatchToProps = {
-  deleteContact: actions.addContacts,
-};
+const mapStateToProps = (state) => ({
+  visibleContacts: getAll(state),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contactlist);
+// const mapDispatchToProps = {
+//   deleteContact: removeContact,
+// };
+
+export default connect(mapStateToProps)(Contactlist);

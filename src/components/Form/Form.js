@@ -3,8 +3,10 @@ import React, { Component } from "react";
 import { v4 as id } from "uuid";
 import Alert from "../Notifications/Notifications";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import actions from "../../redux/actions";
+// import actions from "../../redux/actions";
+import { addContact } from "../../redux/operations";
 import { connect } from "react-redux";
+import { getContact } from "../../redux/selectors";
 class Form extends Component {
   state = {
     name: "",
@@ -89,10 +91,10 @@ class Form extends Component {
 }
 
 const mapStateToProps = ({ contacts }) => ({
-  contacts: contacts.items,
+  contacts: getContact(contacts),
 });
 
 const mapDispatchToProps = {
-  addContact: actions.addContact,
+  addContact,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
