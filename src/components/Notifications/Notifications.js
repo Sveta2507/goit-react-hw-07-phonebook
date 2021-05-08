@@ -6,7 +6,7 @@ class Alert extends Component {
     this.props.change(false);
   };
 
-  componentDidMount() {
+  componentWillUnmount() {
     clearTimeout(id);
   }
 

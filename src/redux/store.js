@@ -1,17 +1,9 @@
-import {
-  contactsReducer,
-  filterReducer,
-  notificationReducer,
-  loadingReducer,
-} from "./reducers";
 import { configureStore } from "@reduxjs/toolkit";
+import reducer from "./reducers";
 
 const store = configureStore({
   reducer: {
-    contacts: contactsReducer,
-    filter: filterReducer,
-    isExists: notificationReducer,
-    isLoading: loadingReducer,
+    contacts: reducer,
   },
 });
 

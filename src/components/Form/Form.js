@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import { v4 as id } from "uuid";
 import Alert from "../Notifications/Notifications";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
+import actions from "../../redux/actions";
+import { connect } from "react-redux";
 class Form extends Component {
   state = {
     name: "",
@@ -27,12 +28,19 @@ class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { name, number } = this.state;
+    const { contacts, addContact } = this.props;
     const contact = {
       id: id(),
       number: number,
       name: name,
     };
-    this.props.addContact(contact);
+    if (contacts.find(({ name }) => name === contact.name)) {
+      this.setState({
+        alert: true,
+      });
+      return;
+    }
+    addContact(contact);
     this.setState({ name: "", number: "" });
   };
 
@@ -42,6 +50,7 @@ class Form extends Component {
 
   render() {
     const { name, number } = this.state;
+    const { handleChange, handleSubmit } = this;
     return (
       <>
         <TransitionGroup className={classes.notif}>
@@ -51,13 +60,13 @@ class Form extends Component {
             </CSSTransition>
           )}
         </TransitionGroup>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <label className={classes.label}>Name: </label>
           <input
             type="text"
             required
             name="name"
-            onChange={this.handleChange}
+            onChange={handleChange}
             placeholder="Enter your name please"
             value={name}
           />
@@ -66,7 +75,7 @@ class Form extends Component {
             type="text"
             required
             name="number"
-            onChange={this.handleChange}
+            onChange={handleChange}
             placeholder="Enter your phone number please"
             value={number}
           />
@@ -79,4 +88,11 @@ class Form extends Component {
   }
 }
 
-export default Form;
+const mapStateToProps = ({ contacts }) => ({
+  contacts: contacts.items,
+});
+
+const mapDispatchToProps = {
+  addContact: actions.addContact,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
