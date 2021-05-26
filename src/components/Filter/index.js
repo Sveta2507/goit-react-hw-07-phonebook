@@ -1,1 +1,2 @@
-export { default as Filter } from "./Filter";
+import Filter from "./Filter";
+export default Filter;
